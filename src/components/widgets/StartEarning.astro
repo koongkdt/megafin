@@ -1,0 +1,34 @@
+---
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import ItemGrid from '~/components/ui/ItemGrid.astro';
+import type { Features as Props } from '~/types';
+
+const {
+  title = await Astro.slots.render('title'),
+  items = [],
+  columns = 3,
+
+  defaultIcon,
+
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-5xl ${classes?.container ?? ''}`} bg={bg}>
+  <div class="py-7 mx-auto text-center max-w-3xl">
+    <h2 class="font-bold text-3xl uppercase" set:html={title} />
+  </div>
+  <ItemGrid
+    items={items}
+    columns={columns}
+    defaultIcon={defaultIcon}
+    classes={{
+      container: '',
+      title: 'text-2xl font-bold uppercase',
+      ...((classes?.items as Record<string, never>) ?? {}),
+    }}
+  />
+</WidgetWrapper>

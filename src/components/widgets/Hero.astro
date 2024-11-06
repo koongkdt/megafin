@@ -1,0 +1,34 @@
+---
+import Button from '~/components/ui/Button.astro';
+
+import type { Hero as Props } from '~/types';
+
+const { id, title, subtitle, callToAction, isHeightScreen = false } = Astro.props;
+---
+
+<section class="relative md:-mt-[76px] not-prose" {...id ? { id } : {}}>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="pt-0 md:pt-[76px] pointer-events-none"></div>
+    <div class={`${isHeightScreen ? 'min-h-[calc(100vh-76px)]' : 'min-h-[500px]'} flex justify-center items-center flex-col`}>
+      <div class="flex flex-col gap-5 items-center text-center">
+        <h1 class="text-5xl font-bold motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade text-gradient">{title}</h1>
+        <h2 class="text-2xl font-semibold motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          {subtitle}
+        </h2>
+      </div>
+      <div class="flex flex-col max-w-sm justify-center items-center mx-auto text-center">
+        {
+          callToAction && (
+            <div class="flex mt-24 mb-16">
+              <Button {...callToAction} />
+            </div>
+          )
+        }
+
+        <p class="text-xl uppercase motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          Built on Superchain
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

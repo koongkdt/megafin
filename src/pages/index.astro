@@ -1,0 +1,95 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import StartEarning from '~/components/widgets/StartEarning.astro';
+
+const metadata = {
+  title: 'Megafin',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero ******************* -->
+
+  <Hero
+    isHeightScreen
+    title="MEGAFIN"
+    subtitle="The first DePIN project built on Superchain"
+    callToAction={{
+      text: 'COMING SOON',
+    }}
+  />
+
+  <!-- Start Earning *************** -->
+
+  <StartEarning
+    id="start_earning"
+    title="Start Earning"
+    items={[
+      {
+        title: '#1 Download',
+        description: 'Download the Megafin Web Extention',
+        image: { src: '~/assets/images/download.png', alt: '#1 Download' },
+      },
+      {
+        title: '#2 CREATE ACCOUNT',
+        description: 'Log into your Megafin account on the Extention',
+        image: { src: '~/assets/images/create_account.png', alt: '#2 CREATE ACCOUNT' },
+      },
+      {
+        title: '#3 EARN',
+        description: 'Keep Megafin running on the Background to Earn',
+        image: { src: '~/assets/images/earn.png', alt: '#3 EARN' },
+      },
+    ]}
+  />
+
+  <!-- How it work **************** -->
+
+  <Content
+    isReversed
+    image={{
+      src: '~/assets/images/work.png',
+      alt: 'What is megafin and how it works?',
+    }}
+    callToAction={{ text: 'COMING SOON' }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-3xl font-bold uppercase mb-8 text-gradient">What is megafin and how it works?</h3>
+      <div class="font-semibold">
+        By installing Megafin, you gain rewards for contributing your unused Internet bandwidth to the Megafin network.
+        <br /><br />
+        Megafin transforms the Internet into a space where both individuals and companies benefit. Verified institutions
+        can compensate you directly for providing the bandwidth they require to improve their online services. Your personal
+        data remains private and secure.
+      </div>
+    </Fragment>
+  </Content>
+
+  <!-- JOIN THE COMMUNITY **************** -->
+
+  <Content
+    image={{
+      src: '~/assets/images/community.png',
+      alt: 'JOIN THE COMMUNITY',
+    }}
+    callToAction={{ text: 'JOIN NOW', href: 'https://discord.gg/megafin' }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-3xl font-bold uppercase mb-8 text-gradient">JOIN THE COMMUNITY</h3>
+    </Fragment>
+  </Content>
+
+  <!-- Infrastructure partners *********** -->
+
+  <Hero
+    title="Infrastructure partners"
+    subtitle="Thanks to these partners for supporting Megafin sustainably and safely"
+    callToAction={{
+      text: 'COMING SOON',
+    }}
+  />
+</Layout>

@@ -1,0 +1,65 @@
+---
+import type { ItemGrid as Props } from '~/types';
+import { twMerge } from 'tailwind-merge';
+import Button from './Button.astro';
+import Image from '../common/Image.astro';
+
+const { items = [], columns, classes = {} } = Astro.props;
+
+const {
+  container: containerClass = '',
+  panel: panelClass = '',
+  title: titleClass = '',
+  description: descriptionClass = '',
+  action: actionClass = '',
+} = classes;
+---
+
+{
+  items && (
+    <div
+      class={twMerge(
+        `grid mx-auto gap-8 md:gap-y-12 ${columns === 3 ? 'sm:grid-cols-3' : columns === 1 ? 'sm:grid-cols-1 ' : ''}`,
+        containerClass
+      )}
+    >
+      {items.map(({ title, description, image, callToAction, classes: itemClasses = {} }) => (
+        <div class="intersect-once motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <div class={twMerge('flex flex-col max-w-md', panelClass, itemClasses?.panel)}>
+            <div class="flex justify-center items-center aspect-square">
+              {image && (
+                <Image
+                  class="mx-auto w-full"
+                  widths={[400, 768, 1024, 2040]}
+                  sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
+                  loading="eager"
+                  width={200}
+                  height={200}
+                  {...image}
+                />
+              )}
+            </div>
+            <div class="p-8 text-center">
+              {title && <h3 class={twMerge('text-xl font-bold', titleClass, itemClasses?.title)}>{title}</h3>}
+              {description && (
+                <p
+                  class={twMerge(
+                    `${title ? 'mt-5' : ''} text-base font-semibold`,
+                    descriptionClass,
+                    itemClasses?.description
+                  )}
+                  set:html={description}
+                />
+              )}
+              {callToAction && (
+                <div class={twMerge(`${title || description ? 'mt-3' : ''}`, actionClass, itemClasses?.actionClass)}>
+                  <Button variant="link" {...callToAction} />
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
